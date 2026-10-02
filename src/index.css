@@ -1,13 +1,261 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+:root {
+  --border: #d8dde3;
+  --text: #1f2933;
+  --muted: #66707a;
+  --accent: #2563eb;
+  --danger: #b42318;
+  --bg-soft: #f4f6f8;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text);
+  background: var(--bg-soft);
+  line-height: 1.45;
+}
+
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+}
+
+.app__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.app__header h1 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.app__actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ---------- Кнопки ---------- */
+
+button {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:hover {
+  border-color: var(--muted);
+}
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.app__actions button:first-child {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.app__actions .secondary {
+  color: var(--muted);
+}
+
+/* ---------- Фильтр ---------- */
+
+.filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 16px;
+}
+
+.filter__item {
+  color: var(--muted);
+}
+
+.filter__item--active {
+  background: var(--text);
+  border-color: var(--text);
+  color: #fff;
+}
+
+/* ---------- Список ---------- */
+
+.todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.todo__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo__title {
+  font-weight: 600;
+}
+
+.todo--done .todo__title {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.todo__description {
+  font-size: 14px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.todo__priority {
+  flex-shrink: 0;
+  font-size: 12px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.todo__priority--high {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.todo__priority--medium {
+  border-color: #b7791f;
+  color: #b7791f;
+}
+
+.empty {
+  padding: 32px;
+  text-align: center;
+  color: var(--muted);
+  background: #fff;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+/* ---------- Модалка ---------- */
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgb(31 41 51 / 55%);
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  padding: 24px;
+  background: #fff;
+  border-radius: 10px;
+}
+
+.modal h2 {
+  margin: 0 0 16px;
+  font-size: 20px;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal label {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.modal input[type='text'],
+.modal input:not([type]),
+.modal textarea {
+  font: inherit;
+  padding: 8px 10px;
+  margin-bottom: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  resize: vertical;
+}
+
+.modal input[aria-invalid='true'],
+.modal textarea[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+.field-error {
+  margin: -12px 0 16px;
+  font-size: 13px;
+  color: var(--danger);
+}
+
+.modal fieldset {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px;
+  margin: 0 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal legend {
+  font-size: 14px;
+  padding: 0 4px;
+}
+
+.priority-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+}
+
+.priority-option input {
+  margin: 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.modal-actions button[type='submit'] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
 }
